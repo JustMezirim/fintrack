@@ -1,0 +1,60 @@
+import { 
+    Sheet, 
+    SheetContent, 
+    SheetDescription, 
+    SheetHeader, 
+    SheetTitle, 
+} from "@/components/ui/sheet"
+import { useNewCategory } from "@/features/categories/hooks/use-new-category"
+import { CategoryForm  } from "@/features/categories/components/category-form"
+import { insertCategorySchema } from "@/db/schema"
+import { z } from "zod"
+import { useCreateCategory } from "@/features/categories/api/use-create-category"
+import { useQueryClient } from "@tanstack/react-query"
+
+const formSchema = insertCategorySchema.pick({
+    name: true,
+});
+
+type FormValues = z.input<typeof formSchema>;
+
+export const NewCategorySheet = () => {
+    const { isOpen, onClose } = useNewCategory()
+
+    const mutation = useCreateCategory()
+    const queryClient = useQueryClient()
+
+    const onSubmit = (values: FormValues) => {
+        mutation.mutate(values, {
+            onSuccess: () => {
+                // Invalidate or refetch the category list query
+                queryClient.invalidateQueries({ queryKey: ["categories"] })  // 👈 make sure this matches your list query key
+                onClose()
+            }
+        })
+    }
+    return (
+        <Sheet open={isOpen} onOpenChange={onClose}>
+            <SheetContent className="space-y-4">
+                <SheetHeader>
+                    <SheetTitle>
+                        New Category
+                    </SheetTitle>
+                    <SheetDescription>
+                        Create a new.
+                    </SheetDescription>
+                </SheetHeader>
+                <CategoryForm 
+                    onSubmit={onSubmit} 
+                    disabled={mutation.isPending} 
+                    defaultValues={{
+                        id: "",
+                        name: "",
+                        plaidId: "",
+                        userId: "",
+                    }}
+                />
+            </SheetContent>
+        </Sheet>
+    )
+}

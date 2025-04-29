@@ -1,0 +1,1 @@
+ALTER TABLE "accounts" ADD COLUMN "paid_id" text NOT NULL;
