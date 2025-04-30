@@ -14,7 +14,7 @@ import { Edit, MoreHorizontal, Trash } from "lucide-react";
 type Props = {
     id: string;
 };
-
+export const dynamic = 'force-dynamic';
 export const Actions = ({id}: Props) => {
     const [ConfirmDialog, confirm] = useConfirm(
         "Are you sure?",    

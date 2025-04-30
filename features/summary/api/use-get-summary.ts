@@ -1,18 +1,32 @@
-// /features/accounts/api/use-get-accounts.ts
+'use client';
+
+import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { useSearchParams } from "next/navigation";
 import { client } from "@/lib/hono";
 
 export const useGetSummary = () => {
-    const params = useSearchParams();
-    const from = params.get("from") || "";
-    const to = params.get("to") || "";
-    const accountId = params.get("accountId") || "";
+    const [params, setParams] = useState<URLSearchParams | null>(null);
 
-    // Fetch the query from the API using react-query
+    // Use useEffect to ensure window is only accessed client-side
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            const searchParams = new URLSearchParams(window.location.search);
+            setParams(searchParams);
+        }
+    }, []); // This will only run once, when the component mounts
+
+    // Use params only after it's been initialized
+    const from = params?.get("from") || "";
+    const to = params?.get("to") || "";
+    const accountId = params?.get("accountId") || "";
+
+    // Ensure the query doesn't run before params are set
     const query = useQuery({
         queryKey: ["summary", { from, to, accountId }],
         queryFn: async () => {
+            if (!params) {
+                throw new Error("Params are not initialized yet");
+            }
             const response = await client.api.summary.$get({
                 query: {
                     from,
@@ -46,5 +60,5 @@ export const useGetSummary = () => {
         },
     });
 
-    return query;  
+    return query;
 };

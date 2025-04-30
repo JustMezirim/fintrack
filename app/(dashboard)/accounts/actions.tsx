@@ -1,33 +1,32 @@
 "use client";
+
 import { Button } from "@/components/ui/button";
 import { 
-    DropdownMenu ,
+    DropdownMenu,
     DropdownMenuTrigger,
     DropdownMenuContent,
     DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 import { useConfirm } from "@/hooks/use-confirm";
 import { useDeleteAccount } from "@/features/accounts/api/use-delete-account";
-import { useOpenAccount } from "@/features/accounts/hooks/use-open-account";
 import { Edit, MoreHorizontal, Trash } from "lucide-react";
+import { useOpenAccount } from "@/features/accounts/hooks/use-open-account";
 
 type Props = {
     id: string;
 };
 
-export const Actions = ({id}: Props) => {
+const ActionsContent = ({ id }: Props) => {
     const [ConfirmDialog, confirm] = useConfirm(
         "Are you sure?",    
         "You are about to delete this account. This action cannot be undone."
     );
 
-
-    const deleteMutation = useDeleteAccount(id)
-    const { onOpen } = useOpenAccount()
+    const deleteMutation = useDeleteAccount(id);
+    const { onOpen } = useOpenAccount();
 
     const handleDelete = async () => {
         const ok = await confirm();
-
         if (ok) {
             deleteMutation.mutate();
         }
@@ -35,7 +34,7 @@ export const Actions = ({id}: Props) => {
 
     return (
         <>
-        <ConfirmDialog />
+            <ConfirmDialog />
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                     <Button variant="ghost" className="size-8 p-0">
@@ -44,7 +43,6 @@ export const Actions = ({id}: Props) => {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
                     <DropdownMenuItem 
-                        disabled={false}
                         className="cursor-pointer" 
                         onClick={() => onOpen(id)}
                     >
@@ -62,5 +60,9 @@ export const Actions = ({id}: Props) => {
                 </DropdownMenuContent>
             </DropdownMenu>
         </>
-    )
-}
+    );
+};
+
+export const Actions = ({ id }: Props) => {
+    return <ActionsContent id={id} />;
+};

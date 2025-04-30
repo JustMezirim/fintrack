@@ -1,5 +1,8 @@
-import { AccountFilter } from "./account-filter"
-import { DateFilter } from "./date-filter"
+// filters.tsx
+"use client";
+
+import { AccountFilter } from "./account-filter";
+import { DateFilter } from "./date-filter";
 
 export const Filters = () => {
     return (
@@ -7,5 +10,5 @@ export const Filters = () => {
             <AccountFilter />
             <DateFilter />
         </div>
-    )
-}
+    );
+};

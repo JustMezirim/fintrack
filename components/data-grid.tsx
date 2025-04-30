@@ -7,6 +7,7 @@ import { formatdateRange } from "@/lib/utils";
 import { useSearchParams } from "next/navigation"
 import { DataCard } from "./data-card";
 import { DataCardSkeleton } from "./data-card-skeleton";
+// import { Suspense } from "react";
 
 export const DataGrid = () => {
     const { data, isLoading } = useGetSummary()

@@ -8,7 +8,7 @@ import { ArrowUpDown } from "lucide-react"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Actions } from "./actions"
 
-
+export const dynamic = 'force-dynamic';
 export type ResponseType = InferResponseType<typeof client.api.categories.$get, 200>["data"][number]
 export const columns: ColumnDef<ResponseType>[] = [
     {
