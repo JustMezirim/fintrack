@@ -25,8 +25,8 @@ export const RadialVariant = ({ data }: Props) => {
             <RadialBarChart
                 cx="50%"
                 cy="50%"
-                innerRadius="40%"     // inner smaller
-                outerRadius="90%"     // outer larger
+                innerRadius="40%"    
+                outerRadius="90%"     
                 barSize={10}
                 data={data.map((item, index) => ({
                     ...item,

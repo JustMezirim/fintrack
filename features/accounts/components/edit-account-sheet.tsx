@@ -26,16 +26,16 @@ const formSchema = insertAccountSchema.pick({
 type FormValues = z.input<typeof formSchema>;
 
 export const EditAccountSheet = () => {
-    const { isOpen, onClose, id } = useOpenAccount()
+    const { onOpen , onClose, id } = useOpenAccount()
 
     const [ConfirmDialog, confirm] = useConfirm(
         "Are you sure?",    
         "You are about to delete this account. This action cannot be undone."
     );
 
-    const accountQuery = useGetAccount(id)
-    const editMutation = useEditAccount(id)
-    const deleteMutation = useDeleteAccount(id)
+    const accountQuery = useGetAccount(id ?? undefined)
+    const editMutation = useEditAccount(id ?? undefined)
+    const deleteMutation = useDeleteAccount(id ?? undefined)
     const queryClient = useQueryClient()
 
     const isPending = editMutation.isPending || deleteMutation.isPending
@@ -43,7 +43,7 @@ export const EditAccountSheet = () => {
 
 
     const onSubmit = (values: FormValues) => {
-        editMutation.mutate({ param: { id }, json: values }, {
+        editMutation.mutate({ param: { id: id ?? undefined }, json: values }, {
             onSuccess: () => {
                 queryClient.invalidateQueries({ queryKey: ["accounts"] })
                 onClose()
@@ -78,7 +78,7 @@ export const EditAccountSheet = () => {
     return (
         <>
         <ConfirmDialog />
-            <Sheet open={isOpen} onOpenChange={onClose}>
+            <Sheet open={!!id} onOpenChange={(open) => !open && onClose()}>
                 <SheetContent className="space-y-4">
                     <SheetHeader>
                         <SheetTitle>
@@ -96,7 +96,7 @@ export const EditAccountSheet = () => {
                             </div>
                         ) : (
                             <AccountForm 
-                                id={id}
+                                id={id ?? undefined}
                                 onSubmit={onSubmit} 
                                 disabled={isPending} 
                                 defaultValues={defaultValues}

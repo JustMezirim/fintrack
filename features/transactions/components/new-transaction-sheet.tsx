@@ -66,8 +66,7 @@ export const NewTransactionSheet = () => {
     const onSubmit = (values: FormValues) => {
         createMutation.mutate({ json: { ...values, amount: values.amount } }, {
             onSuccess: () => {
-                // Invalidate or refetch the account list query
-                queryClient.invalidateQueries({ queryKey: ["transactions"] })  // 👈 make sure this matches your list query key
+                queryClient.invalidateQueries({ queryKey: ["transactions"] })  
                 onClose()
             }
         })

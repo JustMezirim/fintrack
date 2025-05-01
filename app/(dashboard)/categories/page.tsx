@@ -1,6 +1,5 @@
 "use client"
 
-// import { Suspense } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { useNewCategory } from "@/features/categories/hooks/use-new-category";
@@ -62,8 +61,6 @@ export default function CategoriesPageContent() {
           </Button>
         </CardHeader>
         <CardContent>
-          {/* Wrap the component that uses async data (such as DataTable) inside Suspense */}
-          {/* <Suspense fallback={<div>Loading categories...</div>}> */}
             <DataTable
               columns={columns}
               data={categories}
@@ -74,7 +71,6 @@ export default function CategoriesPageContent() {
               }}
               disabled={isDisabled}
             />
-          {/* </Suspense> */}
         </CardContent>
       </Card>
     </div>

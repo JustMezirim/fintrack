@@ -1,8 +1,12 @@
 "use client";
 
 import { useCallback } from "react";
+import { useSearchParams } from "next/navigation";
 
 export const useOpenAccount = () => {
+    const searchParams = useSearchParams();
+    const id = searchParams.get("id");
+
     const onOpen = useCallback((id: string) => {
         const params = new URLSearchParams(window.location.search);
         params.set("id", id);
@@ -16,6 +20,7 @@ export const useOpenAccount = () => {
     }, []);
 
     return {
+        id,
         onOpen,
         onClose,
     };

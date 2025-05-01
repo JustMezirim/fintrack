@@ -97,11 +97,11 @@ export const DataCard = ({
                         formattingFn={formatCurrency}
                     />
                 </h1>
-                {percentageChange !== 0 && (
+                {/* {percentageChange !== 0 && (
                     <p>
                         {formatPercentage(percentageChange)} from last period
                     </p>
-                )}
+                )} */}
             </CardContent>
         </Card>
     )

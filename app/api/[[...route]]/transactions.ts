@@ -179,12 +179,12 @@ const app = new Hono()
             .values(
                 values.map((values) => ({
                     id: createId(),
-                    date: new Date(), // Provide a default or valid date
-                    amount: values.amount, // Ensure `amount` is included in the input
-                    payee: values.payee, // Ensure `payee` is included in the input
-                    accountId: values.accountId, // Ensure `accountId` is included in the input
-                    notes: values.notes, // Optional field
-                    categoryId: values.categoryId, // Optional field
+                    date: new Date(), 
+                    amount: values.amount,
+                    payee: values.payee, 
+                    accountId: values.accountId, 
+                    notes: values.notes,
+                    categoryId: values.categoryId,
                 }))
             )
             .returning(); 

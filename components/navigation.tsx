@@ -47,7 +47,7 @@ export const Navigation = () => {
 
     if (isMobile) {
         return (
-            <div className="flex flex-col items-start w-full mt-2"> {/* Changed to column layout */}
+            <div className="flex flex-col items-start w-full mt-2"> 
                 <Sheet open={isOpen} onOpenChange={setIsOpen}>
                     <SheetTrigger asChild>
                         <Button
@@ -56,7 +56,7 @@ export const Navigation = () => {
                             className="font-normal bg-white/10 hover:bg-white/20 hover:text-white border-none focus-visible:ring-offset-0 focus-visible:ring-transparent outline-none text-white focus:bg-white/30 transition ml-4" /* Added ml-4 for alignment */
                             aria-label="Open navigation menu"
                         >
-                            <Menu className="size-5 mr-2" /> {/* Added margin right to icon */}
+                            <Menu className="size-5 mr-2" />
   
                         </Button>
                     </SheetTrigger>

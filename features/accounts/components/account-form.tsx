@@ -52,7 +52,7 @@ export const AccountForm = ({
         <Form {...form}>
             <form 
                 onSubmit={form.handleSubmit(handleSubmit)}
-                className="space-y-4 pt-4"
+                className="space-y-4 pt-4 ml-4 mr-4"
             >
                 <FormField
                     name="name"
@@ -65,7 +65,7 @@ export const AccountForm = ({
                             <FormControl>
                                 <Input
                                     disabled={disabled}
-                                    placeholder="e.g: Cash, Bank, Credit Card"
+                                    // placeholder="e.g: Cash, Bank, Credit Card"
                                     {...field}
                                 />
                             </FormControl>

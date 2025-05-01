@@ -12,21 +12,18 @@ export const useDeleteAccount = (id?: string) => {
         mutationFn: async () => {
             if (!id) throw new Error("Account ID is required");
             const response = await client.api.accounts[":id"]["$delete"]({ param: { id } });
-            return response; // Ensure the response matches the expected ClientResponse type
+            return response; 
         },
         onSuccess: (_, __, context) => {
             toast.success("Account deleted successfully");
 
-            // Remove from ["accounts"] list
             queryClient.setQueryData<any[]>(["accounts"], (oldAccounts) => {
                 if (!oldAccounts) return [];
                 return oldAccounts.filter((account) => account.id !== id);
             });
 
-            // Remove individual account queries (if any)
+      
             queryClient.removeQueries({ queryKey: ["accounts", { id }] });
-
-            // Refresh related data
             queryClient.invalidateQueries({ queryKey: ["transactions"] });
             queryClient.invalidateQueries({ queryKey: ["summary"] });
         },

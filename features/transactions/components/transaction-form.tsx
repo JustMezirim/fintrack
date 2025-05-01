@@ -65,8 +65,15 @@ export const TransactionForm = ({
 }: Props) => {
     const form = useForm<FormValues>({
         resolver: zodResolver(formSchema),
-        defaultValues: defaultValues,
-    });
+        defaultValues: {
+          date: defaultValues?.date ?? new Date(),
+          accountId: defaultValues?.accountId ?? "",
+          categoryId: defaultValues?.categoryId ?? null,
+          payee: defaultValues?.payee ?? "",
+          amount: defaultValues?.amount ?? "",
+          notes: defaultValues?.notes ?? "",
+        },
+      });
 
     const handleSubmit = (values: FormValues) => {
         const amount = parseFloat(values.amount)
@@ -87,7 +94,7 @@ export const TransactionForm = ({
         <Form {...form}>
             <form 
                 onSubmit={form.handleSubmit(handleSubmit)}
-                className="space-y-4 pt-4"
+                className="space-y-4 pt-4 mr-4 ml-4"
             >
                 <FormField
                     name="date"

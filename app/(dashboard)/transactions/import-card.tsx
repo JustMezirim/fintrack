@@ -96,16 +96,16 @@ export const ImportCard = ({
     
             return {
                 ...obj,
-                date: parse(obj.date, dateFormat, new Date()), // ✅ Parse to Date object
-                amount: Number(obj.amount),                   // ✅ Convert to number
-                accountId: String(obj.accountId),              // ✅ Force string
-                payee: String(obj.payee),                      // ✅ Force string
-                notes: obj.notes ? String(obj.notes) : undefined,    // ✅ Optional
-                categoryId: obj.categoryId ? String(obj.categoryId) : undefined,  // ✅ Optional
+                date: parse(obj.date, dateFormat, new Date()),
+                amount: Number(obj.amount),                 
+                accountId: String(obj.accountId),              
+                payee: String(obj.payee),                      
+                notes: obj.notes ? String(obj.notes) : undefined,    
+                categoryId: obj.categoryId ? String(obj.categoryId) : undefined,  
             };
         });
     
-        console.log({ arrayOfData }); // For debugging
+        console.log({ arrayOfData });
     
         onSubmit(arrayOfData);
     };
@@ -119,9 +119,6 @@ export const ImportCard = ({
                     <CardTitle className="text-xl line-clamp-1">
                         Import Transaction
                     </CardTitle>
-                    {/* <CardDescription className="text-sm text-gray-500">
-                        Manage your transactions here.
-                    </CardDescription> */}
                 </div>
                 <div className="flex flex-wrap flex-col lg:flex-row gap-y-2 items-center gap-x-2">
                     <Button 
