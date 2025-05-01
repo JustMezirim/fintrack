@@ -27,8 +27,7 @@ export const NewCategorySheet = () => {
     const onSubmit = (values: FormValues) => {
         mutation.mutate(values, {
             onSuccess: () => {
-                // Invalidate or refetch the category list query
-                queryClient.invalidateQueries({ queryKey: ["categories"] })  // 👈 make sure this matches your list query key
+                queryClient.invalidateQueries({ queryKey: ["categories"] })
                 onClose()
             }
         })
@@ -41,7 +40,7 @@ export const NewCategorySheet = () => {
                         New Category
                     </SheetTitle>
                     <SheetDescription>
-                        Create a new.
+                        Create a new Category
                     </SheetDescription>
                 </SheetHeader>
                 <CategoryForm 
