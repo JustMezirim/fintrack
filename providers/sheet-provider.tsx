@@ -18,7 +18,7 @@ export const SheetProvider = () => {
     
     return (
         <>
-            <Suspense fallback={<div>Loading filters...</div>}>
+            <Suspense>
             <NewAccountSheet />
             <EditAccountSheet />
             <NewCategorySheet />

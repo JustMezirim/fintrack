@@ -27,7 +27,7 @@ export const Header = () => {
                 </div>
                 <WelcomeMsg />
                 
-                <Suspense fallback={<div>Loading filters...</div>}>
+                <Suspense>
                     <Filters />
                 </Suspense>
             </div>
